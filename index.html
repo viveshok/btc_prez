@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>CRYPTO</title>
+
+        <meta name="description" content="Cryptocurrency markets">
+        <meta name="author" content="Alexandre Beaulne">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="js/reveal.js/css/reveal.css">
+        <link rel="stylesheet" href="js/reveal.js/css/theme/black.css" id="theme">
+
+        <!-- Code syntax highlighting -->
+        <link rel="stylesheet" href="js/reveal.js/lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'js/reveal.js/css/print/pdf.css' : 'js/reveal.js/css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                                  tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+                               });
+        </script>
+
+        <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+
+        <!--[if lt IE 9]>
+            <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section data-background="#ffffff">
+                    <img width="559" height="322" data-src="magic.jpg" style="background:none; border:none; box-shadow:none;">
+                    <h3>Cryptocurrency markets</h3>
+                    <p>
+                    <small><a href="http://cs.mcgill.ca/~abeaul10">Alexandre Beaulne</a></small>
+                    </p>
+                </section>
+
+                <section data-background="#ffffff">
+                    <h2>Agenda</h2>
+                    <ul>
+                        <li>context</li>
+                        <li>theory</li>
+                        <li>libraries</li>
+                        <li>demo</li>
+                    </ul>
+                </section>
+
+                <section data-background="#ffffff">
+                    <h3>Addendum</h3>
+                </section>
+
+                <section data-background="#ffffff">
+                    <img width="800" height="600" data-src="coders_who_trade.png" style="background:none; border:none; box-shadow:none;">
+                    <small><a href="https://www.bloomberg.com/professional/blog/coders-trade-wall-street-designs-staff-future/">https://www.bloomberg.com/professional/blog/coders-trade-wall-street-designs-staff-future/</a></small>
+                </section>
+
+                <!--
+                <section data-background="#ffffff">
+                    <h2>RDD</h2>
+                    <ul>
+                        <li><u>R</u>esilient <u>D</u>istributed <u>D</u>ataset</li>
+                        <li class="fragment">RDDs are logical collections of data partitioned across machines</li>
+                        <li class="fragment">RDDs are the essence of Spark</li>
+                        <li class="fragment">RDDs are the interface to your data</li>
+                        <li class="fragment">RDDs are immutable</li>
+                        <li class="fragment">RDDs are lazily evaluated</li>
+                    </ul>
+                </section>
+                -->
+
+                <!--
+                <section data-background="#ffffff">
+                    <h4>Quick Example</h4>
+                    <pre><code class="hljs" contenteditable>
+>>> log_rdd = sc.textFile('nasa.log')
+>>> tokens_rdd = log_rdd.map(lambda line: line.split(' '))
+>>> hours_rdd = tokens_rdd.map(lambda tokens: datetime.strptime(tokens[3], '[%d/%b/%Y:%H:%M:%S').hour)
+>>> hours_rdd.countByValue()
+{0: 47862, 1: 38531, 2: 32508, 3: 29995, 4: 26756, 5: 27587, 6: 31287, 7: 47386, 8: 65443, 9: 78695, 10: 88309, 11: 95344, 12: 105143, 13: 104536, 14: 101394, 15: 109465, 16: 99527, 17: 80834, 18: 66809, 19: 59315, 20: 59944, 21: 57985, 22: 60673, 23: 54570}
+                    </code></pre>
+                </section>
+                -->
+
+                <!--
+                <section data-background="#ffffff">
+                    <h2>HKID check digit algorithm</h2>
+                    <ul>
+                        <li>if HKID is eigth characters long: $$checksum = \sum_{i=0}^{7}{(9-i) \times CHAR2INT[HKID[i]]}$$</li>
+                        <li>if HKID is seven character long: $$checksum = 9 \times 36 + \sum_{i=0}^{6}{(8-i) \times CHAR2INT[HKID[i]]}$$</li>
+                        <li>check digit is given by: $$checkdigit = INT2CHAR[11 - checksum \ \% \ 11]$$</li>
+                    </ul>
+                </section>
+                -->
+
+                <!--
+                <section data-background="#ffffff">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Sample size</td>
+                                <td>Plain Python</td>
+                                <td>Spark RDD*</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>7 264 100
+                                </td>
+                                <td>~120 s</td>
+                                <td>~120 s
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1 375 000 000
+                                </td>
+                                <td>~6 h</td>
+                                <td>~ 18 mins
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <font size="4">
+                        * Spark cluster on AWS EC2 with 10 M1-large instances, 2 cores per instances
+                    </font>
+                </section>
+                -->
+
+            </div>
+
+        </div>
+
+        <script src="js/reveal.js/lib/js/head.min.js"></script>
+        <script src="js/reveal.js/js/reveal.js"></script>
+
+        <script>
+
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            math: {
+                mathjax: 'js/MathJax.js',
+                config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+            },
+
+            // Optional reveal.js plugins
+            dependencies: [
+            { src: 'js/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: 'js/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'js/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'js/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: 'js/reveal.js/plugin/zoom-js/zoom.js', async: true },
+            { src: 'js/reveal.js/plugin/notes/notes.js', async: true },
+            { src: 'js/reveal.js/plugin/math/math.js', async: true }
+            ]
+        });
+
+        </script>
+
+    </body>
+</html>
